@@ -132,16 +132,19 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
+### Entry 1 - [October 26,2026,10pm]
+**What I did**:Set up my GitHub repository.
 
 **Details**:
+- Forked the starter repository.
+- Set my student ID to 444051735.
+- Prepared the project for development.
 
-**Challenges**:
+**Challenges**:Understanding the repository setup.
 
-**Solution**:
+**Solution**:Followed the instructions step by step.
 
-**Time spent**:
+**Time spent**:40minutes.
 
 ---
 
