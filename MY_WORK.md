@@ -148,16 +148,19 @@
 
 ---
 
-### Entry 2 - [Date and Time]
-**What I did**:
+### Entry 2 - [November 1, 2026, 3:00 AM]
+**What I did**: Implemented the ready queue lock.
 
 **Details**:
+- Added ReentrantLock.
+- Protected the four queue methods.
+- Used try/finally to release the lock.
 
-**Challenges**:
+**Challenges**: Choosing where to lock the queue.
 
-**Solution**:
+**Solution**: Protected each method that accesses shared queue data.
 
-**Time spent**:
+**Time spent**: 75 minutes
 
 ---
 
