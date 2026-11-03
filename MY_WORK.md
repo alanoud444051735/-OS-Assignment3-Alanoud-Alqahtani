@@ -164,16 +164,19 @@
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**:
+### Entry 3 - [November 3, 2026, 7:00 AM]
+**What I did**: Protected shared statistics.
 
 **Details**:
+- Added locks for three counters.
+- Protected counter updates and reads.
+- Reviewed the locking code.
 
-**Challenges**:
+**Challenges**: Understanding shared counter access.
 
-**Solution**:
+**Solution**: Used separate locks to prevent race conditions.
 
-**Time spent**:
+**Time spent**: 60 minutes
 
 ---
 
