@@ -180,16 +180,19 @@
 
 ---
 
-### Entry 4 - [Date and Time]
-**What I did**:
+### Entry 4 - [November 4, 2026, 12:30 AM]
+**What I did**: Implemented the counting semaphore.
 
 **Details**:
+- Added Semaphore.
+- Replaced busy waiting.
+- Implemented clean CPU shutdown
 
-**Challenges**:
+**Challenges**: Understanding semaphore permits.
 
-**Solution**:
+**Solution**: Used permits to signal available processes.
 
-**Time spent**:
+**Time spent**: 90 minutes
 
 ---
 
