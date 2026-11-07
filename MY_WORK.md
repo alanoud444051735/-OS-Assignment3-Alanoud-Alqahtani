@@ -196,16 +196,20 @@
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**:
+### Entry 5 - [November 7, 2026, 12:00 AM]
+**What I did**: Tested the program and worked on answering the questions and recording the video
 
 **Details**:
+- Reviewed the three features.
+- Checked the program output.
+- Prepared the answers.
+- Start recording the video.
 
-**Challenges**:
+**Challenges**: Explaining synchronization concepts
 
-**Solution**:
+**Solution**: Reviewed the code and assignment instructions.
 
-**Time spent**:
+**Time spent**: 180 minutes
 
 ---
 
