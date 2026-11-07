@@ -230,13 +230,13 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: 8 hours and 10 minutes.
 
-**Most challenging part**:
+**Most challenging part**: Implementing the semaphore and understanding how permits control CPU threads.
 
-**Most interesting learning**:
+**Most interesting learning**: How locks prevent race conditions when threads share data.
 
-**What I would do differently next time**:
+**What I would do differently next time**: I would test the program with different numbers of CPUs and processes to make sure the synchronization works in different situations.
 
 ---
 
