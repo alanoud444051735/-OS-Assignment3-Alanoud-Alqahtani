@@ -252,35 +252,35 @@
 
 ## Question 1: What did you learn about synchronization?
 
-> 💡 **TIP:** Talk about race conditions (read-modify-write), critical sections, mutual exclusion with `ReentrantLock` and `try/finally`, the role of a counting semaphore, and what surprised you when the starter failed.
+> 馃挕 **TIP:** Talk about race conditions (read-modify-write), critical sections, mutual exclusion with `ReentrantLock` and `try/finally`, the role of a counting semaphore, and what surprised you when the starter failed.
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+I learned that synchronization is important when multiple threads access shared data. Race conditions can happen when two threads read, modify, and write the same variable at the same time. I learned that critical sections must be protected using "ReentrantLock" to provide mutual exclusion. Using "try/finally" ensures that the lock is always released. I also learned that a counting semaphore helps CPUs wait for available processes without busy waiting. I was surprised when the original starter crashed because multiple CPUs selected the same process, but adding locks fixed this problem.
 
 ## Question 2: What was the most challenging part of this assignment?
 
-> 💡 **TIP:** Pick **one** specific challenge (understanding why the starter failed, choosing the lock granularity, the initial value of the semaphore, the shutdown of the CPUs, Git, the video) and say *why* it was hard.
+> 馃挕 **TIP:** Pick **one** specific challenge (understanding why the starter failed, choosing the lock granularity, the initial value of the semaphore, the shutdown of the CPUs, Git, the video) and say *why* it was hard.
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+The most challenging part of this assignment was understanding how the counting semaphore works. At first, I was confused about why the semaphore should start with zero permits. I also found it difficult to understand how CPUs wait when the ready queue is empty. Another challenge was understanding why we need to release permits when all processes are completed. I learned that without releasing these permits, some CPUs might remain blocked forever. After reviewing the code and testing the program, I understood how the semaphore controls CPU threads.
 
 ## Question 3: How did you overcome the challenges you faced?
 
-> 💡 **TIP:** Describe your method: reading the slides and the documentation, adding `System.out.println` to debug, running the program many times, re-reading the README, testing after each small change, asking for help.
+> 馃挕 **TIP:** Describe your method: reading the slides and the documentation, adding `System.out.println` to debug, running the program many times, re-reading the README, testing after each small change, asking for help.
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+I overcame the challenges by reading the assignment instructions and reviewing the lecture slides. I also studied the code carefully to understand how locks and semaphores work. I tested the program after implementing each feature to check for errors. When I faced difficulties, I reviewed the related methods and tried to understand the problem. I ran the final program to make sure all 19 processes completed successfully. The final output showed that all shared values were correct and busy-waiting polls were zero.
 
 ## Question 4: Where can synchronization concepts be applied in real-world applications?
 
-> 💡 **TIP:** Use real applications you know (banking and money transfers, ticket or seat booking, a shared counter on a website, a print queue, a database) and connect each one to what you built here (shared data, critical section, lock or semaphore).
+> 馃挕 **TIP:** Use real applications you know (banking and money transfers, ticket or seat booking, a shared counter on a website, a print queue, a database) and connect each one to what you built here (shared data, critical section, lock or semaphore).
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+Synchronization is used in many real-world applications where multiple users access shared data. For example, banking systems use locks to prevent incorrect account balances when two transactions happen at the same time. Ticket booking systems use synchronization to prevent two people from booking the same seat. Printers use semaphores to manage print jobs and control access to shared resources. These examples are similar to my CPU scheduler, where multiple CPUs access the same ready queue. Using locks and semaphores helps prevent race conditions and ensures that shared data remains correct.
 
 ### Optional: What would you like to learn more about?
 
@@ -298,89 +298,118 @@
 
 # Part C: Technical Answers (0.5 mark)
 
-> 🛑 **STOP:** You cannot answer these questions without understanding the code. Re-read `SchedulerSimulationSync.java` and **run it** first. Your answers must reference **your own code and your own output** (your student ID makes your output and your expected values unique).
+> 馃洃 **STOP:** You cannot answer these questions without understanding the code. Re-read `SchedulerSimulationSync.java` and **run it** first. Your answers must reference **your own code and your own output** (your student ID makes your output and your expected values unique).
 >
-> ⚠️ **WARNING:** Each answer must be **3 to 5 sentences**, with specific examples from your code or output. Use correct terms: race condition, critical section, mutual exclusion, mutex lock, semaphore, busy waiting, deadlock, producer, consumer.
+> 鈿狅笍 **WARNING:** Each answer must be **3 to 5 sentences**, with specific examples from your code or output. Use correct terms: race condition, critical section, mutual exclusion, mutex lock, semaphore, busy waiting, deadlock, producer, consumer.
 >
-> 💡 **TIP:** Keep the output of the **original starter** and the output of your **final version** in text files or screenshots, so you can copy real snippets for Question 1.
+> 馃挕 **TIP:** Keep the output of the **original starter** and the output of your **final version** in text files or screenshots, so you can copy real snippets for Question 1.
 
 ## Question 1: Race Condition in Your Own Output
 
 **Question**: Run the **original starter** (before any fix) and paste the **verification block** of that run. Which value was wrong (expected vs observed)? Explain **step by step**, with two named threads/CPUs, how **one lost update** happens on one of the shared variables (read, `RaceWindow.pause()`, write). Why can the same bug happen on a real machine even without `RaceWindow`, and why is it hard to detect?
 
-> ⚠️ **WARNING:** The snippet must come from **your own run** (with your student ID), not from a classmate or from this README.
+> 鈿狅笍 **WARNING:** The snippet must come from **your own run** (with your student ID), not from a classmate or from this README.
 >
-> 💡 **TIP:** Use a small timeline: *CPU-1 reads `contextSwitchCount` = 12 → CPU-2 reads 12 → CPU-1 writes 13 → CPU-2 writes 13 → one increment is lost.* If your starter run crashed before printing numbers, run it several times (or paste the exception and the watchdog message and explain it).
+> 馃挕 **TIP:** Use a small timeline: *CPU-1 reads `contextSwitchCount` = 12 鈫� CPU-2 reads 12 鈫� CPU-1 writes 13 鈫� CPU-2 writes 13 鈫� one increment is lost.* If your starter run crashed before printing numbers, run it several times (or paste the exception and the watchdog message and explain it).
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+In my original starter, CPU-1, CPU-2, CPU-3, and CPU-4 tried to execute P1, causing an IllegalThreadStateException. This happened because the ready queue was not protected against a race condition. A lost update can also happen when two threads read the same value before either one writes the new value. On a real machine, this can happen without RaceWindow.pause() because threads can be interrupted at any time. The problem is difficult to detect because it depends on the timing of the threads.
 
 Verification block of the **original starter**:
 ```
-[Paste the verification block (or the exception/watchdog message) of the starter here]
+[CPU-1] picks P1
+[CPU-2] picks P1
+[CPU-4] picks P1
+[CPU-3] picks P1
+
+Exception in thread "CPU-2" java.lang.IllegalThreadStateException
+Exception in thread "CPU-4" java.lang.IllegalThreadStateException
+Exception in thread "CPU-3" java.lang.IllegalThreadStateException
 ```
 
 Verification block of **my final version**:
 ```
-[Paste the verification block of your final version here (all lines ✔)]
+═══ VERIFICATION (expected values are computed from YOUR seed) ═══
+
+Context switches (quanta executed)   expected 39       observed 39       ✔
+Completed processes                  expected 19       observed 19       ✔
+Total service time (ms)              expected 145087   observed 145087   ✔
+Busy-waiting polls (must be 0)       expected 0        observed 0        ✔
+
+✔ All shared values are consistent.
 ```
 
 **Explanation of the timeline:**
-[Explain the lost update step by step.]
+Example of how a lost update can happen in contextSwitchCount:
+1. CPU-1 reads contextSwitchCount = 12.
+2. CPU-1 reaches RaceWindow.pause().
+3. CPU-2 reads the same value, 12.
+4. CPU-1 writes 13.
+5. CPU-2 also writes 13.
+6. 
+The correct value should be 14, but the observed value becomes 13, so one update is lost.
 
 ## Question 2: Critical Sections and Lock Granularity
 
 **Question**: List the **critical sections** you protected (variables and methods) and the lock(s) you used. **Lock granularity:** did you use **one lock** for the three statistics or **one lock per variable**? Why, and what is the trade-off? Why is the **ready queue** protected by a **different** lock than the statistics? Explain how your solution provides **mutual exclusion**, and discuss **progress** and **bounded waiting** (a default `ReentrantLock` is not fair: what does that imply?).
 
-> 💡 **TIP:** The three counters are independent: does updating `contextSwitchCount` need to block an update of `totalServiceTime`? Also think about what could go wrong (deadlock, or long waiting) if the queue lock and the statistics lock were the **same** lock and a thread held it while doing something slow.
+> 馃挕 **TIP:** The three counters are independent: does updating `contextSwitchCount` need to block an update of `totalServiceTime`? Also think about what could go wrong (deadlock, or long waiting) if the queue lock and the statistics lock were the **same** lock and a thread held it while doing something slow.
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+I protected `ReadyQueue.add()`, `poll()`, `processOf()`, and `snapshot()` using `queueLock`, and I protected each shared statistics counter with its own `ReentrantLock`. Separate counter locks allow independent updates to run concurrently, although they use more locks and add some complexity. The queue uses a different mutex lock so queue operations do not unnecessarily block statistics updates or cause long waits. Calling `lock()` and releasing it in `finally` provides mutual exclusion, while keeping critical sections short supports progress. Since the default `ReentrantLock` is not fair, bounded waiting is not guaranteed and a thread could wait longer than others.
 
 | Critical section (variable / method) | Lock used | Why it needs protection |
 |---|---|---|
-| [e.g., `ReadyQueue.poll()`] | [lock name] | [reason] |
-| [...] | [...] | [...] |
+| [ReadyQueue.add()] | [queueLock] | [Prevents simultaneous queue updates] |
+| [ReadyQueue.poll()] | [queueLock] | [Prevents CPUs from removing the same thread] |
+| [ReadyQueue.processOf()] | [queueLock] | [Protects shared map access] |
+| [ReadyQueue.snapshot()] | [queueLock] | [Ensures consistent queue reading] |
+| [contextSwitchCount] | [contextSwitchLock] | [Prevents lost increments] |
+| [completedProcessCount] | [completedLock] | [Prevents incorrect completion counts] |
+| [totalServiceTime] | [serviceTimeLock] | [Prevents lost service-time updates] |
+| [getContextSwitchCount()] | [contextSwitchLock] | [Protects shared counter reading] |
+| [getCompletedProcessCount()] | [completedLock] | [Protects shared counter reading] |
+| [getTotalServiceTime()] | [serviceTimeLock] | [Protects shared service-time reading] |
 
 ## Question 3: Busy Waiting vs Semaphore
 
 **Question**: Describe the **busy waiting** of the starter and its cost (give the `Busy-waiting polls` number from your **starter** run). What does the **value of your semaphore** represent? What is its **initial value** and why? What is its value right after the `numProcesses` initial `add()` calls? Why does the last CPU call `release(totalCPUs)` at the end, and what would happen if it did not?
 
-> 💡 **TIP:** Think about what a CPU does when the queue is empty in the starter, and what a CPU does in your final version (is it running, ready or blocked?). Also check what happens to a CPU blocked in `acquire()` when no process will ever be added again.
+> 馃挕 **TIP:** Think about what a CPU does when the queue is empty in the starter, and what a CPU does in your final version (is it running, ready or blocked?). Also check what happens to a CPU blocked in `acquire()` when no process will ever be added again.
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+In the starter, CPUs used busy waiting by repeatedly checking the ready queue, which wastes CPU resources. I replaced this with a counting semaphore called available, initialized to 0 because no processes have been added yet. After adding the initial 19 processes, the semaphore has 19 permits, and each CPU uses acquire() to wait for work instead of polling. When all processes finish, wakeAllCPUs() calls release(totalCPUs) to wake blocked CPUs so they can exit. Without this release, some CPUs could remain blocked forever, preventing the program from terminating normally
 
 ## Question 4: Classical Problems and Deadlock
 
 **Question**: The CPUs and the ready queue look like a classical synchronization problem of Chapter 5. **Name it**, and say who plays the **producer** and the **consumer** roles (careful: here the CPUs also re-enqueue processes). If the ready queue were **bounded** (capacity `K`), name the **three semaphores** you would need and their **initial values**. Describe a **deadlock scenario** that appears if a thread acquired the **mutex before** waiting on the semaphore (or if two locks were acquired in different orders), and say **which of the four necessary conditions** you would break to prevent it.
 
-> 💡 **TIP:** Recall the bounded-buffer solution of the slides (`empty`, `full`, `mutex`) and the order of `wait()` calls in the producer and the consumer. For the deadlock, think about a producer that holds the mutex while waiting for a free slot that only a consumer (who needs the mutex) can create.
+> 馃挕 **TIP:** Recall the bounded-buffer solution of the slides (`empty`, `full`, `mutex`) and the order of `wait()` calls in the producer and the consumer. For the deadlock, think about a producer that holds the mutex while waiting for a free slot that only a consumer (who needs the mutex) can create.
 
 **Your Answer:** *(3-5 sentences)*
 
 **Classical problem and roles**:
-[Name the problem; who is the producer, who is the consumer?]
+This is the producer-consumer problem: the main thread produces the initial processes and the CPUs consume them from the ready queue. CPUs also act as producers when they re-enqueue unfinished processes.
 
 **Semaphores for a bounded queue (name and initial value)**:
-[Name the three semaphores and their initial values.]
+For a bounded queue of capacity `K`, the semaphores are `empty = K` (free slots), `full = 0` (available processes), and `mutex = 1` (mutual exclusion).
 
 **Deadlock scenario and prevention**:
-[Describe the scenario and the necessary condition you would break.]
+A deadlock can occur if a producer holds `mutex` while waiting on `empty`, because a consumer cannot acquire `mutex` to remove a process and free a slot. Waiting on `empty` before acquiring `mutex` prevents this situation by breaking the hold-and-wait condition.
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. Race conditions and mutual exclusion with `ReentrantLock`.
+2. Protecting critical sections with separate locks.
+3. Using semaphores to avoid busy waiting.
 
 **Concepts I need to study more:**
-1.
-2.
+1. Deadlock prevention and lock ordering.
+2. Lock fairness and bounded waiting.
 
 ---
 
